@@ -25,7 +25,6 @@ namespace MyFinalProj.Models
         [Required(ErrorMessage = "Please input an amount available")]
         public int AmountAvailable { get; set; }
         public string PicturePath { get; set; }
-       // [Required(ErrorMessage = "Please choose the category")]
         public Category Category { get; set; }
 
         public Cart Cart { get; set; }
