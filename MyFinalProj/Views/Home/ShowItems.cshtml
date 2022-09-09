@@ -1,0 +1,58 @@
+﻿@model MyFinalProj.Models.ItemResponse;
+
+
+<div class="wrapper d-flex align-items-stretch">
+    @await Html.PartialAsync("_Sidebar")
+    <div id="content">
+        @if (Model.Items.Count == 0)
+        {
+        <div class="container p-5">
+            <h4 class="text-muted">@ViewBag.EmptyMessage</h4>
+            <a class="btn btn-sm btn-primary" asp-controller="Home" asp-action="Index">Back to Shop</a>
+        </div>
+        }
+        else
+        {
+            @await Html.PartialAsync("_Pagination", Model)
+            <div class="container">
+                <div class="row">
+                    <!-- amount of items in a row -->
+                    @{ int i = 1;}
+                    @foreach (var item in Model.Items.ToList())
+                    {
+                        <div class="col">
+                            <p>
+                                <a asp-action="ItemPage" asp-route-id="@item.ItemId">
+                                    <img class="img-thumbnail" src="@item.PicturePath" width="250" height="250" />
+                                </a>
+                            </p>
+                            <p>
+                                <a asp-action="ItemPage" asp-route-id="@item.ItemId">@item.Name</a>
+                            </p>
+                        </div>
+                        if (i % 3 == 0)
+                        {
+                            <!-- start a new row if amount of items in a row equals 3 -->
+                            <div class="w-100"></div>
+                        }
+                        i++;
+                    }
+                </div>
+            </div>
+            @await Html.PartialAsync("_Pagination", Model)
+        }
+
+    </div>
+</div>
+        
+        
+
+   
+    
+  
+
+
+
+
+
+

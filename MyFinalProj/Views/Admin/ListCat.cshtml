@@ -1,0 +1,29 @@
+﻿@model IEnumerable<MyFinalProj.Models.Category>;
+<h1>List of Items</h1>
+
+<div class="container m-1">
+    @foreach (var cat in Model)
+    {
+        <table class="table">
+            <tr>
+                <td class="w-25">@cat.CategoryName</td>
+                <td class="w-auto">
+                    <a class="btn btn-sm btn-primary" asp-action="EditCat" asp-route-id="@cat.CategoryId">Edit</a>
+                </td>
+                <td class="w-auto">
+                    <form asp-action="DeleteCat" asp-route-id="@cat.CategoryId" method="post">
+                        <button type="submit" class="btn btn-sm btn-danger">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+
+
+            </tr>
+
+        </table>
+    }
+
+    <a class="btn btn-sm btn-primary" asp-action="Index">Admin Page</a>
+
+</div>

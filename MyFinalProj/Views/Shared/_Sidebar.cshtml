@@ -1,0 +1,46 @@
+﻿@inject MyFinalProj.Models.StoreDbContext db;
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/_sidebarPartial/css/style.css">
+</head>
+<body>
+
+
+    <nav id="sidebar" class="bg-dark">
+        <div class="custom-menu">
+            <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                <i class="fa fa-bars"></i>
+                <span class="sr-only">Toggle Menu</span>
+            </button>
+        </div>
+
+        <ul class="list-unstyled components mb-5 ">
+            <li class="active">
+
+                <h1><a asp-controller="Home" asp-action="Index">MyStore</a></h1>
+            </li>
+            @foreach (var item in db.Categories.ToList())
+            {
+                <li class="active">
+                    <a  asp-controller="Home" asp-action="ItemsByCategory" asp-route-requiredCategoryId="@item.CategoryId"><span class="fa fa-home mr-3"></span>@item.CategoryName</a>
+                </li>
+            } 
+        </ul>
+
+    </nav>
+
+
+
+    <script src="~/_sidebarPartial/js/jquery.min.js"></script>
+    <script src="~/_sidebarPartial/js/popper.js"></script>
+    <script src="~/_sidebarPartial/js/bootstrap.min.js"></script>
+    <script src="~/_sidebarPartial/js/main.js"></script>
+</body>
+</html>

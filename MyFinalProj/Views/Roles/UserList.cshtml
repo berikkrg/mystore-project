@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityUser>
+@{ 
+    ViewBag.Title = "Users";
+}
+<h2>List of users</h2>
+
+<div class="container m-1">
+    @foreach (var user in Model)
+    {<table class="table">
+            <tr>
+                <td class="w-25">@user.Email</td>
+                <td class="w-25">
+                    <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-userid="@user.Id">Access rights</a>
+                    <br />
+                </td>
+            </tr>
+        </table>
+    }
+    <a asp-controller="Admin" asp-action="Index">Admin page</a>
+    <a asp-controller="Roles" asp-action="Index">Roles page</a>
+</div>

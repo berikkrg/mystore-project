@@ -1,0 +1,58 @@
+﻿@model MyFinalProj.Models.ItemResponse;
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Button 08</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="/paginationandbuttons/css/ionicons.min.css">
+    <link rel="stylesheet" href="/paginationandbuttons/css/style.css">
+</head>
+<body>
+    <div class="container justify-content-center">
+        <div class="row m-4 justify-content-center">
+            <div class="block-27 ">
+                <ul>
+                    <li><a asp-controller="Home" asp-action="@Model.ActionName" asp-route-page="1">First</a></li>
+                    @if (Model.CurrentPage > 1)
+                    {
+                        <li><a asp-controller="Home" asp-action="@Model.ActionName" asp-route-page="@(Model.CurrentPage-1)">&lt;</a></li>
+                    }
+                    else
+                    {
+                        <li><a asp-controller="Home" asp-action="@Model.ActionName" asp-route-page="1">&lt;</a></li>
+                    }
+                    @for (int i = 1; i <= Model.Pages; i++)
+                    {
+                        if (Model.CurrentPage == i)
+                        {
+                            <li class="active"><a asp-controller="Home" asp-action="@Model.ActionName" asp-route-page="@i">@i</a></li>
+                        }
+                        else
+                        {
+                            <li><a asp-controller="Home" asp-action="@Model.ActionName" asp-route-page="@i">@i</a></li>
+                        }
+                    }
+                    @if (Model.CurrentPage != Model.Pages)
+                    {
+                        <li><a asp-controller="Home" asp-action="@Model.ActionName" asp-route-page="@(Model.CurrentPage+1)">&gt;</a></li>
+                    }
+                    else
+                    {
+                        <li><a asp-controller="Home" asp-action="@Model.ActionName" asp-route-page="@Model.Pages">&gt;</a></li>
+                    }
+                    <li><a asp-controller="Home" asp-action="@Model.ActionName" asp-route-page="@Model.Pages">Last</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="/paginationandbuttons/js/jquery.min.js"></script>
+    <script src="/paginationandbuttons/js/popper.js"></script>
+    <script src="/paginationandbuttons/js/bootstrap.min.js"></script>
+    <script src="/paginationandbuttons/js/main.js"></script>
+</body>
+</html>

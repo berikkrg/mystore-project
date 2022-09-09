@@ -1,0 +1,30 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@model MyFinalProj.Models.Item;
+@inject SignInManager<IdentityUser> signInManager;
+
+<h2>@Model.Name</h2>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <p>
+                <img src="@Url.Content(Model.PicturePath)" class="img-fluid" />
+            </p>
+        </div>
+        <div class="col">
+            <div>
+                <p>@Model.Name</p>
+                <p>@Model.Cost</p>
+                <p>@Model.Model</p>
+                <p>@Model.Manufacturer</p>
+                <p>@Model.Description</p>
+            </div>
+            <div>
+                <a class="btn btn-sm btn-primary" asp-controller="Home" asp-action="Cart" asp-route-id="@Model.ItemId">Add Item to basket</a>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>

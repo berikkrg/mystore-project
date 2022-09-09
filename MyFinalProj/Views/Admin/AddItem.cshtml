@@ -1,0 +1,102 @@
+﻿@model MyFinalProj.Models.Item;
+<h2>Add Item</h2>
+<div class="container m-1">
+    <form asp-action="AddItem" method="post" asp-controller="Admin" enctype="multipart/form-data">
+        <div asp-validation-summary="All" class="text-danger container">
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Name"></label>
+
+                </div>
+                <div class="col">
+                    <input asp-for="Name" width="150" />
+                </div>
+                <div class="w-100"></div>
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Model"></label>
+                </div>
+                <div class="col">
+                    <input asp-for="Model" />
+                </div>
+                <div class="w-100"></div>
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Manufacturer"></label>
+                </div>
+                <div class="col">
+                    <input asp-for="Manufacturer" />
+                </div>
+                <div class="w-100"></div>
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Description"></label>
+                </div>
+                <div class="col">
+                    <textarea type="text" asp-for="Description" rows="5" cols="100"></textarea>
+                </div>
+                <div class="w-100"></div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Cost"></label>
+                </div>
+                <div class="col">
+                    <input type="number" asp-for="Cost" rows="5" cols="100" />
+                </div>
+                <div class="w-100"></div>
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="AmountAvailable"></label>
+                </div>
+                <div class="col">
+                    <input type="number" asp-for="AmountAvailable" />
+                </div>
+                <div class="w-100"></div>
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label>File</label>
+                </div>
+                <div class="col">
+                    <input type="file" name="uploadedFile" />
+                </div>
+                <div class="w-100"></div>
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Category"></label>
+                </div>
+                <div class="col">
+                    <select name="category" asp-items="ViewBag.Categories"></select>
+                </div>
+                <div class="w-100"></div>
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Seller"></label>
+                </div>
+                <div class="col">
+                    <select name="seller" asp-items="@ViewBag.Sellers"></select>
+                </div>
+                <div class="w-100"></div>
+            </div>
+
+
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <button type="submit">Add Item</button>
+            </div>
+        </div>
+
+
+    </form>
+    <a class="btn btn-sm btn-primary" asp-action="Index">Admin Page</a>
+</div>

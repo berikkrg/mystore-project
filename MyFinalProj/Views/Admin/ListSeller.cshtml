@@ -1,0 +1,28 @@
+﻿@model IEnumerable<MyFinalProj.Models.Seller>;
+<h1>List of Sellers</h1>
+
+<div class="container m-1">
+    @foreach (var sel in Model)
+    {
+        <table class="table">
+            <tr>
+                <td class="w-50">@sel.Name</td>
+                <td class="w-auto">
+                    <a class="btn btn-sm btn-primary" asp-action="EditSeller" asp-route-id="@sel.SellerId">Edit</a>
+                </td>
+                <td class="w-auto">
+                    <form asp-action="DeleteSeller" asp-route-id="@sel.SellerId" method="post">
+                        <button type="submit" class="btn btn-sm btn-danger">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+
+
+            </tr>
+
+        </table>
+    }
+
+    <a class="btn btn-sm btn-primary" asp-action="Index">Admin Page</a>
+</div>

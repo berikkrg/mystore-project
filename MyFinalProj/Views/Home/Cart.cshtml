@@ -1,0 +1,131 @@
+﻿@model MyFinalProj.Models.Cart;
+@using Microsoft.AspNetCore.Mvc;
+
+
+<section class="h-100 gradient-custom">
+    <div class="container py-5">
+        <div class="row d-flex justify-content-center my-4">
+            <div class="col-md-8">
+                <div class="card mb-4">
+                    <div class="card-header py-3">
+                        <h5 class="mb-0">Cart items</h5>
+                    </div>
+                    <div class="card-body">
+                        @if (Model.Items.Count == 0)
+                        {
+                            <h4 class="text-muted">@ViewBag.EmptyMessage</h4>
+                            <a class="btn btn-sm btn-primary" asp-controller="Home" asp-action="Index">Back to Shop</a>
+
+                        }
+
+
+                        @foreach (var item in Model.Items)
+                        {
+
+                            <!-- Single item -->
+                            <div class="row">
+                                <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
+                                    <!-- Image -->
+                                    <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
+                                        <a asp-action="ItemPage" asp-route-id="@item.ItemId">
+                                            <img src="@Url.Content(item.PicturePath)"
+                                                 class="w-100" alt="Item image" />
+                                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                                        </a>
+                                    </div>
+                                    <!-- Image -->
+                                </div>
+
+                                <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
+                                    <!-- Data -->
+                                    <p><strong>Name: @item.Name</strong></p>
+                                    <p>Model: @item.Model</p>
+                                    <p>Cost: @item.Cost</p>
+                                    <p>Available: @item.AmountAvailable</p>
+                                    <button asp-action="RemoveItemFromBasket" asp-route-id="@item.ItemId" type="button" class="btn btn-primary btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
+                                            title="Remove item">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                    <button asp-action="AddItemToWishList" asp-route-id="@item.ItemId" type="button" class="btn btn-danger btn-sm mb-2" data-mdb-toggle="tooltip"
+                                            title="Add item to wishlist">
+                                        <i class="fa fa-heart-o"></i>
+                                    </button>
+                                    <!-- Data -->
+                                </div>
+
+                                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                                    <!-- Quantity -->
+
+                                    <div class="d-flex mb-4" style="max-width: 300px">
+                                        <button class="btn btn-primary px-3 me-2"
+                                                onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                        <!-- -->
+                                        <form asp-action="Cart" asp-controller="Home" method="post" style="max-width:100px">
+
+                                            <div class="form-outline">
+                                                <input id="form1" min="1" max="@item.AmountAvailable" name="quantity" value="@item.AmountToBuy" type="number" class="form-control" />
+
+                                                <button type="submit">Accept Quantity</button>
+                                                <input class="invisible" value="@item.ItemId" name="itemFromCartView" width="10" />
+                                            </div>
+                                        </form>
+                                        <button id="btnPlus" class="btn btn-primary btn-sm px-3 ms-2"
+                                                onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+
+                                    </div>
+                                    <!-- Quantity -->
+
+
+                                </div>
+                                <!-- Price -->
+                                <p class="text-start text-md-center">Total: </p>
+                                <strong id="priceId" type="text">@(item.AmountToBuy*@item.Cost)</strong>
+
+                                <!-- Price -->
+                            </div>
+
+                            <!-- Single item -->
+
+                            <hr class="my-4" />
+                        }
+                    </div>
+                </div>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <p><strong>Payment</strong></p>
+                        <p class="mb-0">Connect us about payment</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-header py-3">
+                        <h5 class="mb-0">Summary</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                                Products
+                                <span></span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                                <div>
+                                    <strong>Total amount</strong>
+                                </div>
+                                <span><strong>@Model.AmountToPay</strong></span>
+                            </li>
+                        </ul>
+
+                        <button type="button" class="btn btn-primary btn-lg btn-block">
+                            Go to checkout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

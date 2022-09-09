@@ -1,0 +1,26 @@
+﻿@model MyFinalProj.Models.Seller;
+<h2>Add Category</h2>
+
+<div class="container m-1">
+    <form asp-action="EditSeller" method="post" asp-controller="Admin">
+        <div asp-validation-summary="All" class="text-danger container">
+            <div class="form-group row">
+                <div class="col">
+                    <label asp-for="Name"></label>
+
+                </div>
+                <div class="col">
+                    <input value="@Model.Name" name="newName" asp-route-id="@Model.SellerId" />
+                </div>
+                <div class="w-100"></div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col">
+                <button type="submit">Edit Seller</button>
+            </div>
+        </div>
+    </form>
+    <a class="btn btn-sm btn-primary" asp-action="Index">Admin Page</a>
+</div>

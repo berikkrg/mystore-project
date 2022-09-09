@@ -1,0 +1,230 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<IdentityUser> signInManager;
+@inject MyFinalProj.Models.StoreDbContext db;
+    
+<!doctype html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,600&display=swap" rel="stylesheet">
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="~/footer/fonts/icomoon/style.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/footer/css/bootstrap.min.css">
+
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="~/footer/css/style.css">
+
+
+
+
+
+    <link rel="stylesheet" href="~/navbar/css/style.css">
+
+</head>
+<body>
+    <section class="ftco-section pt-1 pb-0">
+        <div class="container-fluid  px-md-5">
+            <div class="row justify-content-center pb-0">
+                <div class="col-md-8 order-md-last">
+                    <div class="row">
+                        <div class="col-md-6 text-center">
+                            <a class="navbar-brand" asp-controller="Home" asp-action="Index">MyStore<span>Online Store</span></a>
+                        </div>
+                        <div class="col-md-6 d-md-flex justify-content-end mb-md-0 mb-3">
+                            <form asp-controller="Home" asp-action="Search" method="post" class="searchform order-lg-last">
+                                <div class="form-group d-flex">
+                                    <input name="searchQuery" type="text" class="form-control pl-3" placeholder="Search">
+                                    <button type="submit" placeholder="Search" class="form-control search"><span class="fa fa-search"></span></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 d-flex">
+                    <div class="social-media">
+                        <p class="mb-0 d-flex">
+                            <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"><i class="sr-only">Facebook</i></span></a>
+                            <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"><i class="sr-only">Twitter</i></span></a>
+                            <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"><i class="sr-only">Instagram</i></span></a>
+                            <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-dribbble"><i class="sr-only">Dribbble</i></span></a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+            <div class="container-fluid">
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="fa fa-bars"></span> Menu
+                </button>
+                <div class="collapse navbar-collapse" id="ftco-nav">
+                    <ul class="navbar-nav px-lg-5 container-fluid">
+                        <li class="nav-item active"><a asp-controller="Home" asp-action="Index" class="nav-link">Home</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Items</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown04">
+                                @foreach (var item in db.Categories.ToList())
+                                {
+                                    <a class="dropdown-item" asp-controller="Home" asp-action="ItemsByCategory" asp-route-id="@item.CategoryId">@item.CategoryName</a>
+                                }
+                            </div>
+                        </li>
+                        <li class="nav-item"><a href="#" class="nav-link">Work</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Blog</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+                        <li class="nav-item dropdown">
+                            <div class="social-media">
+                                <div class="mb-0 d-flex">
+                                    <a class="nav-link dropdown-toggle d-flex  align-items-center justify-content-center"
+                                       href="#" id="dropdown04" data-toggle="dropdown"
+                                       aria-haspopup="true" aria-expanded="false">
+                                        <span class="icon-person"><i class="sr-only">Profile</i></span>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdown04">
+
+                                        @if (signInManager.IsSignedIn(User) && User.IsInRole("User"))
+                                        {
+                                            <a class="dropdown-item" href="#">My Profile</a>
+                                            <a class="dropdown-item" href="#">My Purchases</a>
+                                        }
+                                        @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                                        {
+                                            <a class="dropdown-item" asp-controller="Admin" asp-action="Index">Admin Page</a>
+                                            <a class="dropdown-item" href="#" @*asp-controller="Admin" asp-action="Purchases"*@>Purchases</a>
+                                        }
+                                        @if (!signInManager.IsSignedIn(User))
+                                        {
+                                            <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Register">Sign Up</a>
+                                            <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Login">Log in</a>
+                                        }
+                                        @if (signInManager.IsSignedIn(User))
+                                        {
+                                            <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Logout">Log out</a>
+                                        }
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </li>
+                        <li class="nav-item">
+                            <div class="social-media">
+                                <p class="mb-0 d-flex">
+                                    <a asp-controller="Home" asp-action="Cart" class="d-flex align-items-center justify-content-center"><span class="icon-shopping-cart"><i class="sr-only">Purchases</i></span></a>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+        <!-- END nav -->
+
+    </section>
+    <div class="align-items-stretch p-0">
+        <main role="main" class="container-fluid p-0">
+            @RenderBody()
+        </main>
+    </div>
+    <!-- footer -->
+    <footer class="footer-14398 bg-dark pt-2 pb-2">
+
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md-3">
+                    <a href="#" class="footer-site-logo">MyStore</a>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit officiis corporis optio natus. </p>
+                </div>
+                <div class="col-md-2 ml-auto">
+                    <h3>Shop</h3>
+                    <ul class="list-unstyled links">
+                        <li><a href="#">Sell online</a></li>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Examples</a></li>
+                        <li><a href="#">Website editors</a></li>
+                        <li><a href="#">Online retail</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 ml-auto">
+                    <h3>Press</h3>
+                    <ul class="list-unstyled links">
+                        <li><a href="#">Events</a></li>
+                        <li><a href="#">News</a></li>
+                        <li><a href="#">Awards</a></li>
+                        <li><a href="#">Testimonials</a></li>
+                        <li><a href="#">Online retail</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 ml-auto">
+                    <h3>About</h3>
+                    <ul class="list-unstyled links">
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Team</a></li>
+                        <li><a href="#">Career</a></li>
+                        <li><a href="#">Contacts</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-12 pb-4">
+                    <div class="line"></div>
+                </div>
+                <div class="col-md-6 text-md-left">
+                    <ul class="list-unstyled link-menu nav-left">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms &amp; Conditions</a></li>
+                        <li><a href="#">Code of Conduct</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 text-md-right">
+                    <ul class="list-unstyled social nav-right">
+                        <li><a href="#"><span class="icon-twitter"></span></a></li>
+                        <li><a href="#"><span class="icon-instagram"></span></a></li>
+                        <li><a href="#"><span class="icon-facebook"></span></a></li>
+                        <li><a href="#"><span class="icon-pinterest"></span></a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-7">
+                    <p><small>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate, fuga. Ex at maxime eum odio quibusdam pariatur expedita explicabo harum! Consectetur ducimus delectus nemo, totam odit!</small></p>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+    <!-- END footer -->
+    <script src="navbar/js/jquery.min.js"></script>
+    <script src="~/navbar/js/popper.js"></script>
+    <script src="~/navbar/js/bootstrap.min.js"></script>
+    <script src="~/navbar/js/main.js"></script>
+
+    <script src="~/footer/js/jquery-3.3.1.min.js"></script>
+    <script src="~/footer/js/popper.min.js"></script>
+    <script src="~/footer/js/bootstrap.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
