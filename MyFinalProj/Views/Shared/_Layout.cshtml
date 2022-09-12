@@ -80,7 +80,7 @@
                             <div class="dropdown-menu" aria-labelledby="dropdown04">
                                 @foreach (var item in db.Categories.ToList())
                                 {
-                                    <a class="dropdown-item" asp-controller="Home" asp-action="ItemsByCategory" asp-route-id="@item.CategoryId">@item.CategoryName</a>
+                                    <a class="dropdown-item" asp-controller="Home" asp-action="ItemsByCategory" asp-route-requiredCategoryId="@item.CategoryId">@item.CategoryName</a>
                                 }
                             </div>
                         </li>
