@@ -28,41 +28,66 @@ namespace MyFinalProj.Controllers
             db = context;
             if (db.Items.Count()==0)
             {
-                //Filling the database with random data in case if the database is empty
-                Category myCat = new Category { CategoryName = "MyCat" };
-                Seller seller = new Seller { Name = "Seller" };
-                List<Item> items = new List<Item>()
+                //Filling the database with random data if the database is empty
+                Category myCat = new Category { CategoryName = "RandomCat" };
+                Seller seller = new Seller { Name = "RandomSeller" };
+
+
+                List<Item> items = new List<Item>();
+
+                for (int i = 1; i <= 15; i++)
                 {
-                    new Item { AmountAvailable = 100, AmountToBuy = 0, Cost = 2,
-                    Manufacturer = "Some Factory", Description = "You've got to know someting about old memes", Model = "Natural",
-                    Name = "Bananas", Seller = seller, Category = myCat, PicturePath="/files/bananas.jpg" },
-                    new Item { AmountAvailable = 100, AmountToBuy = 0, Cost = 1,
-                    Manufacturer = "Some Factory", Description = "You've got to know something about old memes", Model = "Some",
-                    Name = "People", Seller = seller, Category = myCat,PicturePath="/files/people.jpg" },
-                    new Item { AmountAvailable = 100, AmountToBuy = 0, Cost = 1,
-                    Manufacturer = "Some Factory", Description = "You've got to know something about old memes", Model = "Some",
-                    Name = "Just kidding, not bananas", Seller = seller, Category = myCat, PicturePath="/files/justkidding.jpg" },
-                    new Item { AmountAvailable = 10, AmountToBuy = 0, Cost = 5,
-                    Manufacturer = "Some Manufacturer", Description = "Lorem ipsum dolor sit amet, " +
-                    "consectetur adipiscing elit. Donec a elit eu purus volutpat laoreet.", Model = "Some",
-                    Name = "SomeItem", Seller = seller, Category = myCat, PicturePath="/files/nopic.jpg" },
-                     new Item { AmountAvailable = 10, AmountToBuy = 0, Cost = 5,
-                    Manufacturer = "Some Manufacturer", Description = "Lorem ipsum dolor sit amet, " +
-                    "consectetur adipiscing elit. Donec a elit eu purus volutpat laoreet.", Model = "Some",
-                    Name = "SomeItem", Seller = seller, Category = myCat, PicturePath="/files/nopic.jpg" },
-                      new Item { AmountAvailable = 10, AmountToBuy = 0, Cost = 5,
-                    Manufacturer = "Some Manufacturer", Description = "Lorem ipsum dolor sit amet, " +
-                    "consectetur adipiscing elit. Donec a elit eu purus volutpat laoreet.", Model = "Some",
-                    Name = "SomeItem", Seller = seller, Category = myCat, PicturePath="/files/nopic.jpg" },
-                       new Item { AmountAvailable = 10, AmountToBuy = 0, Cost = 5,
-                    Manufacturer = "Some Manufacturer", Description = "Lorem ipsum dolor sit amet, " +
-                    "consectetur adipiscing elit. Donec a elit eu purus volutpat laoreet.", Model = "Some",
-                    Name = "SomeItem", Seller = seller, Category = myCat, PicturePath="/files/nopic.jpg" },
-                        new Item { AmountAvailable = 10, AmountToBuy = 0, Cost = 5,
-                    Manufacturer = "Some Manufacturer", Description = "Lorem ipsum dolor sit amet, " +
-                    "consectetur adipiscing elit. Donec a elit eu purus volutpat laoreet.", Model = "Some",
-                    Name = "SomeItem", Seller = seller, Category = myCat, PicturePath="/files/nopic.jpg" },
-            };
+
+                    items.Add(
+                        new Item
+                        {
+                            Name = "RandomItem",
+                            AmountAvailable = i * 10,
+                            AmountToBuy = 1,
+                            Cost = i * 2,
+                            Manufacturer = "Random Factory",
+                            Category = myCat,
+                            Seller = seller,
+                            Model = "Random Model",
+                            PicturePath = "/files/nopic.jpg",
+                            Description = "Lorem ipsum dolor sit amet, " +
+                    "consectetur adipiscing elit. Donec a elit eu purus volutpat laoreet."
+                        });
+                }
+            //    {
+
+
+
+                    //        new Item { AmountAvailable = 100, AmountToBuy = 0, Cost = 2,
+                    //        Manufacturer = "Some Factory", Description = "You've got to know someting about old memes", Model = "Natural",
+                    //        Name = "Bananas", Seller = seller, Category = myCat, PicturePath="/files/bananas.jpg" },
+                    //        new Item { AmountAvailable = 100, AmountToBuy = 0, Cost = 1,
+                    //        Manufacturer = "Some Factory", Description = "You've got to know something about old memes", Model = "Some",
+                    //        Name = "People", Seller = seller, Category = myCat,PicturePath="/files/people.jpg" },
+                    //        new Item { AmountAvailable = 100, AmountToBuy = 0, Cost = 1,
+                    //        Manufacturer = "Some Factory", Description = "You've got to know something about old memes", Model = "Some",
+                    //        Name = "Just kidding, not bananas", Seller = seller, Category = myCat, PicturePath="/files/justkidding.jpg" },
+                    //        new Item { AmountAvailable = 10, AmountToBuy = 0, Cost = 5,
+                    //        Manufacturer = "Some Manufacturer", Description = "Lorem ipsum dolor sit amet, " +
+                    //        "consectetur adipiscing elit. Donec a elit eu purus volutpat laoreet.", Model = "Some",
+                    //        Name = "SomeItem", Seller = seller, Category = myCat, PicturePath="/files/nopic.jpg" },
+                    //         new Item { AmountAvailable = 10, AmountToBuy = 0, Cost = 5,
+                    //        Manufacturer = "Some Manufacturer", Description = "Lorem ipsum dolor sit amet, " +
+                    //        "consectetur adipiscing elit. Donec a elit eu purus volutpat laoreet.", Model = "Some",
+                    //        Name = "SomeItem", Seller = seller, Category = myCat, PicturePath="/files/nopic.jpg" },
+                    //          new Item { AmountAvailable = 10, AmountToBuy = 0, Cost = 5,
+                    //        Manufacturer = "Some Manufacturer", Description = "Lorem ipsum dolor sit amet, " +
+                    //        "consectetur adipiscing elit. Donec a elit eu purus volutpat laoreet.", Model = "Some",
+                    //        Name = "SomeItem", Seller = seller, Category = myCat, PicturePath="/files/nopic.jpg" },
+                    //           new Item { AmountAvailable = 10, AmountToBuy = 0, Cost = 5,
+                    //        Manufacturer = "Some Manufacturer", Description = "Lorem ipsum dolor sit amet, " +
+                    //        "consectetur adipiscing elit. Donec a elit eu purus volutpat laoreet.", Model = "Some",
+                    //        Name = "SomeItem", Seller = seller, Category = myCat, PicturePath="/files/nopic.jpg" },
+                    //            new Item { AmountAvailable = 10, AmountToBuy = 0, Cost = 5,
+                    //        Manufacturer = "Some Manufacturer", Description = "Lorem ipsum dolor sit amet, " +
+                    //        "consectetur adipiscing elit. Donec a elit eu purus volutpat laoreet.", Model = "Some",
+                    //        Name = "SomeItem", Seller = seller, Category = myCat, PicturePath="/files/nopic.jpg" },
+                    //};
 
                 db.Categories.Add(myCat);
                 db.Sellers.Add(seller);
