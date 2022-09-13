@@ -1,5 +1,5 @@
 # mystore-project
-mystore is MVP of eCommerce project to show my abilities as .net developer
+mystore is MVP of eCommerce project.
 
 bootstrap templates used in this project:
 
