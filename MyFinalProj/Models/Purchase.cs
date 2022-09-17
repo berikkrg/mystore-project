@@ -12,6 +12,6 @@ namespace MyFinalProj.Models
         public DateTime? PurchaseStart { get; set; }
 
         public DateTime? PurchaseEnd { get; set; }
-        //добавить в класс юзера покупки
+
     }
 }
